@@ -1,0 +1,33 @@
+{
+    "name": "krzysztofmazur/php-object-mapper-bundle",
+    "description": "Easy integrate php-object-mapper with your Symfony application",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/krzysztofmazur",
+    "authors": [
+        {"name": "Krzysztof Mazur", "email": "krz@ychu.pl"}
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "krzysztofmazur/php-object-mapper": "dev-master",
+        "symfony/framework-bundle": "~2.3|~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

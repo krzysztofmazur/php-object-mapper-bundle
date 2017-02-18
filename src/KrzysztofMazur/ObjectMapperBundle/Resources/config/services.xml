@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="km_object_mapper.property_name_converter.class">KrzysztofMazur\ObjectMapper\Util\PropertyNameConverter</parameter>
+        <parameter key="km_object_mapper.fields_matchmaker.class">KrzysztofMazur\ObjectMapper\Mapping\Field\FieldsMatchmaker</parameter>
+        <parameter key="km_object_mapper.instantiator.doctrine.class">Doctrine\Instantiator\Instantiator</parameter>
+        <parameter key="km_object_mapper.instantiator.doctrine_adapter.class">KrzysztofMazur\ObjectMapper\Integration\DoctrineInstantiatorAdapter</parameter>
+        <parameter key="km_object_mapper.field_factory.class">KrzysztofMazur\ObjectMapper\Mapping\Field\FieldFactory</parameter>
+        <parameter key="km_object_mapper.mapping_repository.class">KrzysztofMazur\ObjectMapper\Mapping\MappingRepository</parameter>
+        <parameter key="km_object_mapper.mapper.builder.class">KrzysztofMazur\ObjectMapper\Builder\ObjectMapperBuilder</parameter>
+        <parameter key="km_object_mapper.mapper.class">KrzysztofMazur\ObjectMapper\ObjectMapper</parameter>
+    </parameters>
+
+    <services>
+        <service id="km_object_mapper.property_name_converter" class="%km_object_mapper.property_name_converter.class%" public="false"/>
+        <service id="km_object_mapper.fields_matchmaker" class="%km_object_mapper.fields_matchmaker.class%" public="false">
+            <argument type="service" id="km_object_mapper.property_name_converter"/>
+        </service>
+        <service id="km_object_mapper.instantiator.doctrine" class="%km_object_mapper.instantiator.doctrine.class%" public="false"/>
+        <service id="km_object_mapper.instantiator.doctrine_adapter" class="%km_object_mapper.instantiator.doctrine_adapter.class%" public="false">
+            <argument type="service" id="km_object_mapper.instantiator.doctrine"/>
+        </service>
+        <service id="km_object_mapper.field_factory" class="%km_object_mapper.field_factory.class%" public="false">
+            <argument type="service" id="%km_object_mapper.instantiator_id%"/>
+        </service>
+        <service id="km_object_mapper.mapping_repository" class="%km_object_mapper.mapping_repository.class%" public="false">
+            <argument/>
+            <argument type="service" id="km_object_mapper.field_factory"/>
+            <argument type="service" id="km_object_mapper.fields_matchmaker"/>
+        </service>
+
+        <service id="km_object_mapper.mapper.builder" class="%km_object_mapper.mapper.builder.class%" public="false">
+            <factory class="%km_object_mapper.mapper.factory.class%" function="create"/>
+            <call method="setInstantiator">
+                <argument type="service" id="%km_object_mapper.instantiator_id%"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="km_object_mapper.mapping_repository"/>
+            </call>
+        </service>
+        <service id="km_object_mapper.mapper" class="%km_object_mapper.mapper.class%">
+            <factory service="km_object_mapper.mapper.builder" function="build"/>
+        </service>
+    </services>
+</container>
