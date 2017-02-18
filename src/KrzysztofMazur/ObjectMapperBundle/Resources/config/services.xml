@@ -34,7 +34,7 @@
         </service>
 
         <service id="km_object_mapper.mapper.builder" class="%km_object_mapper.mapper.builder.class%" public="false">
-            <factory class="%km_object_mapper.mapper.factory.class%" method="create"/>
+            <factory class="%km_object_mapper.mapper.builder.class%" method="create"/>
             <call method="setInstantiator">
                 <argument type="service" id="%km_object_mapper.instantiator_id%"/>
             </call>
