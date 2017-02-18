@@ -28,7 +28,7 @@
             <argument type="service" id="%km_object_mapper.instantiator_id%"/>
         </service>
         <service id="km_object_mapper.mapping_repository" class="%km_object_mapper.mapping_repository.class%" public="false">
-            <argument/>
+            <argument type="collection" id="km_object_mapper.configuration_locations"/>
             <argument type="service" id="km_object_mapper.field_factory"/>
             <argument type="service" id="km_object_mapper.fields_matchmaker"/>
         </service>

@@ -26,7 +26,10 @@ class Configuration implements ConfigurationInterface
         $tb->root('km_object_mapper', 'array')
             ->children()
                 ->scalarNode('instantiator_id')->defaultValue("km_object_mapper.instantiator.doctrine_adapter")->end()
-                ->arrayNode('configuration_locations')->cannotBeEmpty()->end()
+                ->arrayNode('configuration_locations')
+                    ->addDefaultsIfNotSet()
+                    ->cannotBeEmpty()
+                ->end()
             ->end();
 
         return $tb;

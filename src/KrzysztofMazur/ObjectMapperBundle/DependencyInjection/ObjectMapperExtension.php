@@ -43,5 +43,8 @@ class ObjectMapperExtension extends ConfigurableExtension
             __DIR__.'/../Resources/config/',
         )));
         $loader->load('services.xml');
+
+        $container->setParameter('km_object_mapper.configuration_locations', $mergedConfig['configuration_locations']);
+        $container->setParameter('km_object_mapper.instantiator_id', $mergedConfig['instantiator_id']);
     }
 }
