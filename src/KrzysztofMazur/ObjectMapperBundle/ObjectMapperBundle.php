@@ -8,6 +8,7 @@
 
 namespace KrzysztofMazur\ObjectMapperBundle;
 
+use KrzysztofMazur\ObjectMapperBundle\DependencyInjection\ObjectMapperExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -15,5 +16,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class ObjectMapperBundle extends Bundle
 {
-
+    /**
+     * {@inheritdoc}
+     */
+    public function getContainerExtension()
+    {
+        return new ObjectMapperExtension();
+    }
 }
