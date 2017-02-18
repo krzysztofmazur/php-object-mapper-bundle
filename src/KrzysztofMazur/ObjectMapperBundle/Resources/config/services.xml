@@ -24,9 +24,7 @@
         <service id="km_object_mapper.instantiator.doctrine_adapter" class="%km_object_mapper.instantiator.doctrine_adapter.class%" public="false">
             <argument type="service" id="km_object_mapper.instantiator.doctrine"/>
         </service>
-        <service id="km_object_mapper.field_factory" class="%km_object_mapper.field_factory.class%" public="false">
-            <argument type="service" id="%km_object_mapper.instantiator_id%"/>
-        </service>
+        <service id="km_object_mapper.field_factory" class="%km_object_mapper.field_factory.class%" public="false"/>
         <service id="km_object_mapper.mapping_repository" class="%km_object_mapper.mapping_repository.class%" public="false">
             <argument type="collection" id="km_object_mapper.configuration_locations"/>
             <argument type="service" id="km_object_mapper.field_factory"/>
@@ -35,9 +33,6 @@
 
         <service id="km_object_mapper.mapper.builder" class="%km_object_mapper.mapper.builder.class%" public="false">
             <factory class="%km_object_mapper.mapper.builder.class%" method="create"/>
-            <call method="setInstantiator">
-                <argument type="service" id="%km_object_mapper.instantiator_id%"/>
-            </call>
             <call method="setRepository">
                 <argument type="service" id="km_object_mapper.mapping_repository"/>
             </call>

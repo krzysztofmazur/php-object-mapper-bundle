@@ -27,8 +27,11 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('instantiator_id')->defaultValue("km_object_mapper.instantiator.doctrine_adapter")->end()
                 ->arrayNode('configuration_locations')
-                    ->addDefaultsIfNotSet()
-                    ->cannotBeEmpty()
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('path')->isRequired()->end()
+                        ->end()
+                    ->end()
                 ->end()
             ->end();
 
