@@ -29,6 +29,14 @@ class ObjectMapperExtension extends ConfigurableExtension
     /**
      * {@inheritdoc}
      */
+    public function getNamespace()
+    {
+        return 'km_object_mapper';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(array(
