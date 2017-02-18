@@ -5,11 +5,18 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="km_object_mapper.instantiator.doctrine.class">Doctrine\Instantiator\Instantiator</parameter>
+        <parameter key="km_object_mapper.instantiator.doctrine_adapter.class">KrzysztofMazur\ObjectMapper\Integration\DoctrineInstantiatorAdapter</parameter>
         <parameter key="km_object_mapper.mapper.builder.class">KrzysztofMazur\ObjectMapper\Builder\ObjectMapperSimpleBuilder</parameter>
         <parameter key="km_object_mapper.mapper.class">KrzysztofMazur\ObjectMapper\ObjectMapper</parameter>
     </parameters>
 
     <services>
+        <service id="km_object_mapper.instantiator.doctrine" class="%km_object_mapper.instantiator.doctrine.class%" public="false"/>
+        <service id="km_object_mapper.instantiator.doctrine_adapter" class="%km_object_mapper.instantiator.doctrine_adapter.class%" public="false">
+            <argument type="service" id="km_object_mapper.instantiator.doctrine"/>
+        </service>
+
         <service id="km_object_mapper.mapper.builder" class="%km_object_mapper.mapper.builder.class%" public="false">
             <factory class="%km_object_mapper.mapper.builder.class%" method="create"/>
             <call method="setConfig">
