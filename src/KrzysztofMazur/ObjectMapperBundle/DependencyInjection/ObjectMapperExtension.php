@@ -47,9 +47,6 @@ class ObjectMapperExtension extends ConfigurableExtension
 
         $container->setParameter('km_object_mapper.configuration_locations', $mergedConfig['configuration_locations']);
         $container
-            ->getDefinition('km_object_mapper.field_factory')
-            ->addArgument(new Reference($mergedConfig['instantiator_id']));
-        $container
             ->getDefinition('km_object_mapper.mapper.builder')
             ->addMethodCall('setInstantiator', [new Reference($mergedConfig['instantiator_id'])]);
     }
