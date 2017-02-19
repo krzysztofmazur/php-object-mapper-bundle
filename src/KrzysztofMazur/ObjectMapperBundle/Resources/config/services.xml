@@ -7,7 +7,8 @@
     <parameters>
         <parameter key="km_object_mapper.instantiator.doctrine.class">Doctrine\Instantiator\Instantiator</parameter>
         <parameter key="km_object_mapper.instantiator.doctrine_adapter.class">KrzysztofMazur\ObjectMapper\Integration\DoctrineInstantiatorAdapter</parameter>
-        <parameter key="km_object_mapper.mapper.builder.class">KrzysztofMazur\ObjectMapper\Builder\ObjectMapperSimpleBuilder</parameter>
+        <parameter key="km_object_mapper.configuration_loader.yaml.class">KrzysztofMazur\ObjectMapperBundle\YamlConfigurationLoader</parameter>
+        <parameter key="km_object_mapper.mapper.builder.class">KrzysztofMazur\ObjectMapperBundle\ObjectMapperBuilder</parameter>
         <parameter key="km_object_mapper.mapper.class">KrzysztofMazur\ObjectMapper\ObjectMapper</parameter>
     </parameters>
 
@@ -17,10 +18,13 @@
             <argument type="service" id="km_object_mapper.instantiator.doctrine"/>
         </service>
 
+        <service id="km_object_mapper.configuration_loader.yaml" class="%km_object_mapper.configuration_loader.yaml.class%">
+            <argument>%km_object_mapper.configuration_locations%</argument>
+        </service>
+
         <service id="km_object_mapper.mapper.builder" class="%km_object_mapper.mapper.builder.class%" public="false">
-            <factory class="%km_object_mapper.mapper.builder.class%" method="create"/>
-            <call method="setConfig">
-                <argument>%km_object_mapper.configuration_locations%</argument>
+            <call method="setConfigurationLoader">
+                <argument>%km_object_mapper.configuration_loader.yaml%</argument>
             </call>
         </service>
         <service id="km_object_mapper.mapper" class="%km_object_mapper.mapper.class%">
