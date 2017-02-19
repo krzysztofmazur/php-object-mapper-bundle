@@ -24,7 +24,7 @@
 
         <service id="km_object_mapper.mapper.builder" class="%km_object_mapper.mapper.builder.class%" public="false">
             <call method="setConfigurationLoader">
-                <argument>%km_object_mapper.configuration_loader.yaml%</argument>
+                <service id="km_object_mapper.configuration_loader.yaml"/>
             </call>
         </service>
         <service id="km_object_mapper.mapper" class="%km_object_mapper.mapper.class%">
