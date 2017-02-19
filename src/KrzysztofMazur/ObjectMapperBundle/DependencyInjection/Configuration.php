@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->scalarNode('path')->isRequired()->end()
+                            ->scalarNode('type')->isRequired()->end()
                         ->end()
                     ->end()
                 ->end()
