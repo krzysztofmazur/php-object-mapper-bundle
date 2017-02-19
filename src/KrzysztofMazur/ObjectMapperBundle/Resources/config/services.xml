@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="km_object_mapper.instantiator.doctrine.class">Doctrine\Instantiator\Instantiator</parameter>
         <parameter key="km_object_mapper.instantiator.doctrine_adapter.class">KrzysztofMazur\ObjectMapper\Integration\DoctrineInstantiatorAdapter</parameter>
-        <parameter key="km_object_mapper.configuration_loader.yaml.class">KrzysztofMazur\ObjectMapperBundle\YamlConfigurationLoader</parameter>
+        <parameter key="km_object_mapper.configuration_loader.yaml.class">KrzysztofMazur\ObjectMapperBundle\ObjectMapperBuilder\YamlConfigurationLoader</parameter>
         <parameter key="km_object_mapper.mapper.builder.class">KrzysztofMazur\ObjectMapperBundle\ObjectMapperBuilder</parameter>
         <parameter key="km_object_mapper.mapper.class">KrzysztofMazur\ObjectMapper\ObjectMapper</parameter>
     </parameters>
