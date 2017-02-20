@@ -63,9 +63,8 @@ class FieldCallbackBuilder implements ContainerAwareInterface
     {
         $className = $matches[1];
         $method = $matches[2];
-        $container = $this->container;
 
-        return function ($source, $target) use ($container, $className, $method) {
+        return function ($source, $target) use ($className, $method) {
             $className::$method($source, $target);
         };
     }
