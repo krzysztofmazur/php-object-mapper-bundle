@@ -63,6 +63,28 @@ class ObjectMapperBuilder
     }
 
     /**
+     * @param bool $debug
+     * @return $this
+     */
+    public function setDebug($debug)
+    {
+        $this->debug = $debug;
+
+        return $this;
+    }
+
+    /**
+     * @param Stopwatch $stopwatch
+     * @return $this
+     */
+    public function setStopwatch($stopwatch)
+    {
+        $this->stopwatch = $stopwatch;
+
+        return $this;
+    }
+
+    /**
      * @return ObjectMapper
      */
     public function build()
