@@ -89,6 +89,10 @@ class ObjectMapperBuilder
      */
     public function build()
     {
+        if ($this->debug) {
+            $this->stopwatch->start('ObjectMapperBuilder::build');
+        }
+
         $mapper = ObjectMapperSimpleBuilder::create()
             ->setInstantiator($this->instantiator)
             ->setConfig($this->configurationLoader->load())
@@ -96,6 +100,7 @@ class ObjectMapperBuilder
 
         if ($this->debug) {
             $mapper = new StopwatchObjectMapperDecorator($mapper, $this->stopwatch);
+            $this->stopwatch->stop('ObjectMapperBuilder::build');
         }
 
         return $mapper;
