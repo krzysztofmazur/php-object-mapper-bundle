@@ -43,9 +43,13 @@ class XmlConfigurationLoader implements ConfigurationLoaderInterface
         return $configs;
     }
 
+    /**
+     * @param string $xml
+     * @return array
+     */
     private static function parseConfigurationFile($xml)
     {
-        $config = (array)simplexml_load_string($xml);
+        $config = (array) simplexml_load_string($xml);
         $parsed = [];
         self::parseStringValue($parsed, $config, 'from');
         self::parseStringValue($parsed, $config, 'to');
@@ -87,7 +91,7 @@ class XmlConfigurationLoader implements ConfigurationLoaderInterface
     private static function parseArrayValue(&$parsed, $config, $property)
     {
         if (isset($config[$property])) {
-            $parsed[$property] = (array)$config[$property];
+            $parsed[$property] = (array) $config[$property];
         }
     }
 }
