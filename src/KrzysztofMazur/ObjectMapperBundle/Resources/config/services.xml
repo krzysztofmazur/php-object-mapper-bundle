@@ -34,6 +34,12 @@
             <call method="setConfigurationLoader">
                 <argument type="service" id="km_object_mapper.configuration_loader"/>
             </call>
+            <call method="setStopwatch">
+                <argument type="service" id="debug.stopwatch"/>
+            </call>
+            <call method="setDebug">
+                <argument>%kernel.debug%</argument>
+            </call>
         </service>
         <service id="km_object_mapper.mapper" class="%km_object_mapper.mapper.class%">
             <factory service="km_object_mapper.mapper.builder" method="build"/>

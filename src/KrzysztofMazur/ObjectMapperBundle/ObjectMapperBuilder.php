@@ -11,7 +11,9 @@ namespace KrzysztofMazur\ObjectMapperBundle;
 use KrzysztofMazur\ObjectMapper\Builder\ObjectMapperSimpleBuilder;
 use KrzysztofMazur\ObjectMapper\ObjectMapper;
 use KrzysztofMazur\ObjectMapper\Util\InstantiatorInterface;
+use KrzysztofMazur\ObjectMapperBundle\Debug\StopwatchObjectMapperDecorator;
 use KrzysztofMazur\ObjectMapperBundle\ObjectMapperBuilder\ConfigurationLoaderInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
  * @author Krzysztof Mazur <krz@ychu.pl>
@@ -27,6 +29,16 @@ class ObjectMapperBuilder
      * @var InstantiatorInterface
      */
     private $instantiator;
+
+    /**
+     * @var bool
+     */
+    private $debug;
+
+    /**
+     * @var Stopwatch
+     */
+    private $stopwatch;
 
     /**
      * @param ConfigurationLoaderInterface $configurationLoader
@@ -55,9 +67,15 @@ class ObjectMapperBuilder
      */
     public function build()
     {
-        return ObjectMapperSimpleBuilder::create()
+        $mapper = ObjectMapperSimpleBuilder::create()
             ->setInstantiator($this->instantiator)
             ->setConfig($this->configurationLoader->load())
             ->build();
+
+        if ($this->debug) {
+            $mapper = new StopwatchObjectMapperDecorator($mapper, $this->stopwatch);
+        }
+
+        return $mapper;
     }
 }
