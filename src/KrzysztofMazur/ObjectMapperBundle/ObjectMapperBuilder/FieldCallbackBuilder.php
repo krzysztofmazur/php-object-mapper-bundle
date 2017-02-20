@@ -32,6 +32,9 @@ class FieldCallbackBuilder implements ContainerAwareInterface
     public function replaceCallbacks(array &$config)
     {
         foreach ($config['fields'] as $target => $source) {
+            if (is_callable($source)) {
+                continue;
+            }
             if (preg_match(self::SERVICE_CALLBACK_PATTERN, $source, $matches)) {
                 $config['fields'][$target] = $this->parseServiceCallback($matches);
             } elseif (preg_match(self::STATIC_CALLBACK_PATTERN, $source, $matches)) {
