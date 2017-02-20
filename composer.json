@@ -9,7 +9,7 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "krzysztofmazur/php-object-mapper": "dev-master",
+        "krzysztofmazur/php-object-mapper": "^0.1",
         "symfony/framework-bundle": "~2.3|~3.0",
         "symfony/yaml": "~2.3|~3.0"
     },
